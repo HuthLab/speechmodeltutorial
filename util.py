@@ -74,11 +74,11 @@ def find_best_words(vectors, vocab, wordspace, actual, display=True, num=15):
         cw = best_corr_vec(vectors[si], vocab, wordspace, n=num)
         cwords.append(cw)
         if display:
-            print "Closest words to scene %d:" % si
-            print [b[1] for b in cw]
-            print "Actual words:"
-            print actual[si]
-            print ""
+            print ("Closest words to scene %d:" % si)
+            print ([b[1] for b in cw])
+            print ("Actual words:")
+            print (actual[si])
+            print ("")
     return cwords
 
 def find_best_stims_for_word(wordvector, decstims, n):

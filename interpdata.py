@@ -42,7 +42,7 @@ def sincinterp1D(data, oldtime, newtime, cutoff_mult=1.0, window=1):
     """
     ## Find the cutoff frequency ##
     cutoff = 1/np.mean(np.diff(newtime)) * cutoff_mult
-    print "Doing sinc interpolation with cutoff=%0.3f and %d lobes." % (cutoff, window)
+    print ("Doing sinc interpolation with cutoff=%0.3f and %d lobes." % (cutoff, window))
     
     ## Construct new signal ##
     newdata = np.zeros((len(newtime),1))
@@ -64,7 +64,7 @@ def sincinterp2D(data, oldtime, newtime, cutoff_mult=1.0, window=1, causal=False
     """
     ## Find the cutoff frequency ##
     cutoff = 1/np.mean(np.diff(newtime)) * cutoff_mult
-    print "Doing sinc interpolation with cutoff=%0.3f and %d lobes." % (cutoff, window)
+    print ("Doing sinc interpolation with cutoff=%0.3f and %d lobes." % (cutoff, window))
     
     ## Construct new signal ##
     # newdata = np.zeros((len(newtime), data.shape[1]))
@@ -94,7 +94,7 @@ def lanczosinterp2D(data, oldtime, newtime, window=3, cutoff_mult=1.0, rectify=F
     """
     ## Find the cutoff frequency ##
     cutoff = 1/np.mean(np.diff(newtime)) * cutoff_mult
-    print "Doing lanczos interpolation with cutoff=%0.3f and %d lobes." % (cutoff, window)
+    print ("Doing lanczos interpolation with cutoff=%0.3f and %d lobes." % (cutoff, window))
     
     ## Build up sinc matrix ##
     sincmat = np.zeros((len(newtime), len(oldtime)))
@@ -122,7 +122,7 @@ def sincupinterp2D(data, oldtime, newtimes, cutoff, window=1):
     Setting [window] to 1 yields a Lanczos filter.
     """
     #cutoff = 1/np.mean(np.diff(oldtime))
-    print "Doing sinc interpolation with cutoff=%0.3f and %d lobes."%(cutoff, window)
+    print ("Doing sinc interpolation with cutoff=%0.3f and %d lobes."%(cutoff, window))
     
     sincmat = np.zeros((len(newtimes), len(oldtime)))
     for ndi in range(len(newtimes)):

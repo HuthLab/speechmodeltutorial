@@ -63,23 +63,23 @@ def model_voxels(Rstim, Pstim, Rresp, Presp, alpha):
     using [Rstim].  Correlation coefficients on the test set ([Presp] and [Pstim])
     will be returned for each voxel, as well as the linear weights.
     """
-    print "Z-scoring stimuli (with a flip)... (or not)"
+    print ("Z-scoring stimuli (with a flip)... (or not)")
     #zRstim = zscore(Rstim.T).T
     #zPstim = zscore(Pstim.T).T
     
     Rresp[np.isnan(Rresp)] = 0.0
     Presp[np.isnan(Presp)] = 0.0
     
-    print "Running ridge regression..."
+    print ("Running ridge regression...")
     rwts = ridge(Rstim, Rresp.T, alpha)
-    print "Finding correlations..."
+    print ("Finding correlations...")
     pred = np.dot(Pstim, rwts)
     prednorms = np.apply_along_axis(np.linalg.norm, 0, pred)
     respnorms = np.apply_along_axis(np.linalg.norm, 0, Presp)
     correlations = np.array(np.sum(np.multiply(Presp, pred), 0)).squeeze()/(prednorms*respnorms)
     
-    print "Max correlation: %0.3f" % np.max(correlations)
-    print "Skewness: %0.3f" % scipy.stats.skew(correlations)
+    print ("Max correlation: %0.3f" % np.max(correlations))
+    print ("Skewness: %0.3f" % scipy.stats.skew(correlations))
     return np.array(correlations), rwts
 
 def model_voxels_old(Rstim, Pstim, Rresp, Presp, alpha):
@@ -87,23 +87,23 @@ def model_voxels_old(Rstim, Pstim, Rresp, Presp, alpha):
     using [Rstim].  Correlation coefficients on the test set ([Presp] and [Pstim])
     will be returned for each voxel, as well as the linear weights.
     """
-    print "Z-scoring stimuli (with a flip)..."
+    print ("Z-scoring stimuli (with a flip)...")
     #zRstim = zscore(Rstim.T).T
     #zPstim = zscore(Pstim.T).T
     
     Rresp[np.isnan(Rresp)] = 0.0
     Presp[np.isnan(Presp)] = 0.0
     
-    print "Running ridge regression..."
+    print ("Running ridge regression...")
     rwts = ridge(Rstim, Rresp.T, alpha)
-    print "Finding correlations..."
+    print ("Finding correlations...")
     correlations = []
     for vi in range(Presp.shape[1]):
         rcorr = np.corrcoef(Presp[:,vi].T,np.array((np.matrix(Pstim) * np.matrix(rwts[:,vi]))).T)[0,1]
         correlations.append(rcorr)
         
-    print "Max correlation: %0.3f" % np.max(correlations)
-    print "Skewness: %0.3f" % scipy.stats.skew(correlations)
+    print ("Max correlation: %0.3f" % np.max(correlations))
+    print ("Skewness: %0.3f" % scipy.stats.skew(correlations))
     return np.array(correlations), rwts
 
 def gaussianize(vec):
@@ -200,7 +200,7 @@ def counter(iterable, countevery=100, total=None, logger=logging.getLogger("coun
 
             formatted_str = "%s items complete (%s%s)"%(itemstr,ratestr,timestr)
             if logger is None:
-                print formatted_str
+                print (formatted_str)
             else:
                 logger.info(formatted_str)
 
@@ -213,10 +213,10 @@ def wait_for_disk(dir, maxtime=0.2, retrytime=10.0, maxtries=100):
         os.listdir(dir)
         lstime = time.time() - stime
         if lstime < maxtime:
-            print "Disk access is quick (%0.3f seconds to ls), continuing.." % lstime
+            print ("Disk access is quick (%0.3f seconds to ls), continuing.." % lstime)
             return
         else:
-            print "Disk access is slow (%0.3f seconds to ls), waiting more.." % lstime
+            print ("Disk access is slow (%0.3f seconds to ls), waiting more.." % lstime)
             time.sleep(retrytime)
 
-    print "Disk access is slow but fuck it, I'm starting anyway.."
+    print ("Disk access is slow but fuck it, I'm starting anyway..")

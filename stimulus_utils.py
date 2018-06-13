@@ -98,7 +98,7 @@ def load_generic_trfiles(stories, root="data/trfiles"):
         try:
             trf = TRFile(os.path.join(root, "%s.report"%story))
             trdict[story] = [trf]
-        except Exception, e:
-            print e
+        except Exception as e:
+            print (e)
     
     return trdict

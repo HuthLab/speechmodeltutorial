@@ -1,5 +1,5 @@
 import tables
-import cPickle
+import pickle
 import numpy as np
 
 import logging
@@ -117,11 +117,12 @@ class SemanticModel(object):
         """Loads a semantic model from the given filename.
         """
         logger.debug("Loading file: %s"%filename)
-        shf = tables.openFile(filename)
+        shf = tables.open_file(filename)
 
         newsm = cls(None, None)
-        newsm.data = shf.getNode("/data").read()
-        newsm.vocab = shf.getNode("/vocab").read()
+        newsm.data = shf.get_node("/data").read()
+        newsm.vocab = [s.decode('utf-8') for s in shf.get_node("/vocab").read()]
+        
         shf.close()
         logger.debug("Done loading file..")
         return newsm
@@ -277,17 +278,17 @@ class SemanticModel(object):
     def print_best_worst(self, ii, n=10):
         vector = self.data[ii]
         sv = np.argsort(self.data[ii])
-        print "Best:"
-        print "-------------"
+        print ("Best:")
+        print ("-------------")
         for ni in range(1,n+1):
-            print "%s: %0.08f"%(np.array(self.vocab)[sv[-ni]], vector[sv[-ni]])
+            print ("%s: %0.08f"%(np.array(self.vocab)[sv[-ni]], vector[sv[-ni]]))
             
-        print "\nWorst:"
-        print "-------------"
+        print ("\nWorst:")
+        print ("-------------")
         for ni in range(n):
-            print "%s: %0.08f"%(np.array(self.vocab)[sv[ni]], vector[sv[ni]])
+            print ("%s: %0.08f"%(np.array(self.vocab)[sv[ni]], vector[sv[ni]]))
             
-        print "\n"
+        print ("\n")
 
 
 def gaussianize(vec):

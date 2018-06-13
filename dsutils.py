@@ -67,7 +67,7 @@ def histogram_phonemes(ds, phonemeset=phonemes):
             #ind = phonemeset.index(ph.upper().strip("0123456789"))
             ind = phind[ph.upper().strip("0123456789")]
             newdata[ii][ind] = 1
-        except Exception, e:
+        except Exception as e:
             pass
 
     return DataSequence(newdata, ds.split_inds, ds.data_times, ds.tr_times)
@@ -84,7 +84,7 @@ def make_semantic_model(ds, lsasm):
     for w in ds.data:
         try:
             v = lsasm[w]
-        except KeyError, e:
+        except KeyError as e:
             v = np.zeros((lsasm.data.shape[0],))
         newdata.append(v)
     return DataSequence(np.array(newdata), ds.split_inds, ds.data_times, ds.tr_times)

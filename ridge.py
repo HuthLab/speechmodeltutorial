@@ -1,4 +1,5 @@
 #import scipy
+from functools import reduce
 import numpy as np
 import logging
 from utils import mult_diag, counter
@@ -62,7 +63,7 @@ def ridge_corr(Rstim, Pstim, Rresp, Presp, alphas, normalpha=False, dtype=np.sin
     logger.info("Doing SVD...")
     try:
         U,S,Vh = np.linalg.svd(Rstim, full_matrices=False)
-    except np.linalg.LinAlgError, e:
+    except np.linalg.LinAlgError as e:
         logger.info("NORMAL SVD FAILED, trying more robust dgesvd..")
         from text.regression.svd_dgesvd import svd_dgesvd
         U,S,Vh = svd_dgesvd(Rstim, full_matrices=False)
@@ -130,7 +131,7 @@ def ridge_corr(Rstim, Pstim, Rresp, Presp, alphas, normalpha=False, dtype=np.sin
         if logger is not None:
             logger.info(log_msg)
         else:
-            print log_msg
+            print (log_msg)
     
     return Rcorrs
 
@@ -225,7 +226,7 @@ def bootstrap_ridge(Rstim, Rresp, Pstim, Presp, alphas, nboots, chunklen, nchunk
     for bi in counter(range(nboots), countevery=1, total=nboots):
         logger.info("Selecting held-out test set..")
         allinds = range(nresp)
-        indchunks = zip(*[iter(allinds)]*chunklen)
+        indchunks = list(zip(*[iter(allinds)]*chunklen))
         random.shuffle(indchunks)
         heldinds = list(itools.chain(*indchunks[:nchunks]))
         notheldinds = list(set(allinds)-set(heldinds))
@@ -246,7 +247,7 @@ def bootstrap_ridge(Rstim, Rresp, Pstim, Presp, alphas, nboots, chunklen, nchunk
     ## Find weights for each voxel
     try:
         U,S,Vh = np.linalg.svd(Rstim, full_matrices=False)
-    except np.linalg.LinAlgError, e:
+    except np.linalg.LinAlgError as e:
         logger.info("NORMAL SVD FAILED, trying more robust dgesvd..")
         from text.regression.svd_dgesvd import svd_dgesvd
         U,S,Vh = svd_dgesvd(Rstim, full_matrices=False)

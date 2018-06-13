@@ -97,13 +97,13 @@ class DataSequence(object):
         """Creates a new DataSequence from a [grid_transript] and a [trfile].
         grid_transcript should be the product of the 'make_simple_transcript' method of TextGrid.
         """
-        data_entries = zip(*grid_transcript)[2]
+        data_entries = list(zip(*grid_transcript))[2]
         if isinstance(data_entries[0], str):
-            data = map(str.lower, zip(*grid_transcript)[2])
+            data = list(map(str.lower, list(zip(*grid_transcript))[2]))
         else:
             data = data_entries
-        word_starts = np.array(map(float, zip(*grid_transcript)[0]))
-        word_ends = np.array(map(float, zip(*grid_transcript)[1]))
+        word_starts = np.array(list(map(float, list(zip(*grid_transcript))[0])))
+        word_ends = np.array(list(map(float, list(zip(*grid_transcript))[1])))
         word_avgtimes = (word_starts + word_ends)/2.0
         
         tr = trfile.avgtr
