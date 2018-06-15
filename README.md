@@ -4,7 +4,7 @@ Originally given as a tutorial at EACL 2014 by Alex Huth.
 
 In this tutorial you will step through a voxel-wise modeling analysis. You will use computational models to extract semantic features from a natural speech stimulus. Then these features will be used to build linear models of fMRI data, and model weights and prediction performance will be visualized.
 
-If you so desire, you can step through this entire tutorial without modifying any code. But there are a few points where you will be able to make simply modifications and then see what effect those modifications have on the results. Additionally at the end you can re-run the model using phoneme features instead of semantic features.
+If you so desire, you can step through this entire tutorial without modifying any code. But there are a few points where you will be able to make simple modifications and then see what effect those modifications have on the results. Additionally, at the end you can re-run the model using phoneme features instead of semantic features.
 
 #### Acknowledgements
 This fMRI data used in this tutorial was collected by Alex Huth and Wendy de Heer at the University of California, Berkeley. All work was supervised by professors Jack Gallant and Frederic Theunissen of the UC Berkeley Psychology Department. Please do not redistribute the code or data used here. Visualization is done using [pycortex](http://pycortex.org).
