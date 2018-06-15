@@ -21,6 +21,6 @@ Installation
 `sudo apt-get install -y ipython ipython-notebook python-numpy python-scipy python-matplotlib cython python-pip python-pip python-dev python-h5py python-nibabel python-lxml python-shapely python-html5lib mayavi2 python-tables git`
 3. Fetch and install pycortex:
 `git clone https://github.com/gallantlab/pycortex.git`
-`cd pycortex; git checkout glrework-merged; python setup.py install`
+`cd pycortex; python setup.py install`
 4. Start a Jupyter notebook server in this directory (if you don't have one):
 `jupyter notebook`
