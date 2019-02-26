@@ -15,7 +15,7 @@ The analysis demonstrated in this tutorial forms the basis of this paper:
 
 Installation
 ------------
-1. Download the [data files](https://utexas.box.com/s/z9fcf3ay3w6xvl0ylddqejksjsoehghz) and unzip in this directory. Should create a directory called `data`.
+1. Download the [data files](https://utexas.box.com/shared/static/4n3lemyec0wlj5rcr80991nxwflsbks9.zip) and unzip in this directory. Should create a directory called `data`.
 2. (If not using Anaconda) install dependencies:
 `sudo apt-get update`
 `sudo apt-get install -y ipython ipython-notebook python-numpy python-scipy python-matplotlib cython python-pip python-pip python-dev python-h5py python-nibabel python-lxml python-shapely python-html5lib mayavi2 python-tables git`
