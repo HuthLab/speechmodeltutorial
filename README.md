@@ -19,8 +19,13 @@ Installation
 2. (If not using Anaconda) install dependencies:
 `sudo apt-get update`
 `sudo apt-get install -y ipython ipython-notebook python-numpy python-scipy python-matplotlib cython python-pip python-pip python-dev python-h5py python-nibabel python-lxml python-shapely python-html5lib mayavi2 python-tables git`
-3. Fetch and install pycortex:
+
+    (If using Conda): `conda install python 'cython=0.29.36' pytables h5py jupyter matplotlib numpy scipy` (NOTE: some packages may be missing from this list)
+
+    (The cython requirement is from this issue: https://github.com/gallantlab/pycortex/issues/490#issuecomment-1644641810 )
+  
+4. Fetch and install pycortex:
 `git clone https://github.com/gallantlab/pycortex.git`
 `cd pycortex; python setup.py install`
-4. Start a Jupyter notebook server in this directory (if you don't have one):
+5. Start a Jupyter notebook server in this directory (if you don't have one):
 `jupyter notebook`
